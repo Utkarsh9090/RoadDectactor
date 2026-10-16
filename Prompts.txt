@@ -1,0 +1,115 @@
+Prompt 1: Project Setup & Environment Configuration
+Plaintext
+Act as a Senior Python Engineer. Help me set up the initial project folder structure and dependencies for an AI Road Detection and Predictive Maintenance project.
+
+1. Create a clean project layout:
+   - /data (for test videos and saved models)
+   - /vision (OpenCV and YOLO detection code)
+   - /rl_engine (Gymnasium environment and Stable-Baselines3 RL agent)
+   - /api (FastAPI backend)
+   - /dashboard (UI visualization)
+2. Generate a comprehensive `requirements.txt` file containing: opencv-python, ultralytics, gymnasium, stable-baselines3, fastapi, uvicorn, pydantic, numpy, pandas, streamlit, and torch.
+3. Write a `config.py` file to manage configuration constants like VIDEO_INPUT_PATH, YOLO_MODEL_PATH, FRAME_SKIP_RATE, and PCI_WEIGHTS.
+
+
+
+
+
+Prompt 2: OpenCV Video Ingestion & YOLO Defect ExtractionAct as a Computer Vision Expert. Write a module `/vision/detector.py` that processes a video feed using OpenCV and YOLOv8/YOLOv11.
+
+Requirements:
+1. Load a YOLO model using the Ultralytics library.
+2. Open a local video file (`.mp4`) using `cv2.VideoCapture`.
+3. Process every N-th frame (e.g., every 5th frame) to keep processing efficient.
+4. Detect four classes: 'dig', 'patch', 'crack', and 'pothole'.
+5. Count total unique defect occurrences per road segment (assume a 100-frame window equals one 100-meter road segment).
+6. Draw bounding boxes and labels on frames, display the frame using `cv2.imshow`, and allow pressing 'q' to quit.
+7. Return a structured dictionary containing total counts per segment: 
+   {"digs": int, "patches": int, "cracks": int, "potholes": int}.
+
+
+
+Prompt 3: Road State Aggregator & PCI Calculation Engine
+Act as a Civil/Software Engineer. Write a module `/vision/pci_engine.py` that converts YOLO defect metrics into a standardized Pavement Condition Index (PCI) and State Vector for Reinforcement Learning.
+
+Requirements:
+1. Define a function `calculate_pci(defects_dict)` that computes PCI starting from 100:
+   PCI = 100 - (digs * 12 + patches * 8 + cracks * 4 + potholes * 15)
+   Ensure PCI is capped between 0.0 and 100.0.
+2. Define a function `build_rl_state(pci, defects_dict, road_age_years)` that formats the vector:
+   `np.array([PCI, digs, patches, cracks, road_age_years], dtype=np.float32)`.
+3. Include unit tests at the bottom of the file to verify PCI calculation edge cases (e.g., zero defects = 100 PCI, heavy defects = 0 PCI).
+
+
+
+Prompt 4: Custom Gymnasium Environment for Road Maintenance
+Act as a Reinforcement Learning Engineer. Build a custom Gymnasium environment in `/rl_engine/road_env.py` for road maintenance policy optimization.
+
+Requirements:
+1. Inherit from `gymnasium.Env`.
+2. Define `action_space` as `Discrete(3)`:
+   - 0: Do Nothing
+   - 1: Preventive Repair (Fix digs/patches, costs 15 points, restores 20 PCI)
+   - 2: Major Resurfacing (Restores PCI to 100, resets defects to 0, costs 60 points)
+3. Define `observation_space` as `Box(low=[0, 0, 0, 0, 0], high=[100, 50, 50, 50, 30], dtype=np.float32)` representing [PCI, Digs, Patches, Cracks, Road Age].
+4. Implement `step(action)`:
+   - Degrade road condition each step based on current defect density and age.
+   - Calculate rewards: reward high PCI, heavily penalize PCI < 40 (-50 penalty), and subtract action execution costs.
+   - Set `done = True` if PCI <= 0 or Road Age >= 15 years.
+5. Implement `reset()` returning initial default road state.
+
+
+
+
+
+Prompt 5: Training Script for RL Agent (DQN / PPO)
+Act as an ML Operations Engineer. Create a script `/rl_engine/train.py` to train a Deep Q-Network (DQN) agent using Stable-Baselines3 on the custom `RoadMaintenanceEnv`.
+
+Requirements:
+1. Instantiate the `RoadMaintenanceEnv`.
+2. Initialize `DQN("MlpPolicy", env, verbose=1, learning_rate=1e-3, buffer_size=10000)`.
+3. Train the model for 50,000 timesteps.
+4. Save the trained model file as `/data/models/dqn_road_policy.zip`.
+5. Include an evaluation loop that runs the trained policy on 5 test episodes and prints the predicted action names ("No Action", "Preventive Repair", "Major Resurfacing") along with cumulative rewards.
+
+
+
+
+
+Prompt 6: OpenCV-YOLO-RL Pipeline Integration
+Act as a Systems Integrator. Create a main orchestration file `main_pipeline.py` that connects OpenCV detection directly to the trained RL prediction model.
+
+Requirements:
+1. Accept an input video file path.
+2. Run OpenCV + YOLO detection (`detector.py`) on video segments.
+3. Pass defect metrics to `pci_engine.py` to calculate PCI and state vectors.
+4. Load the trained DQN model from `/data/models/dqn_road_policy.zip`.
+5. For each segment, predict the optimal maintenance action using `model.predict(state_vector)`.
+6. Print a formatted summary report to stdout:
+   --------------------------------------------------
+   Segment ID: 1
+   Defects Found: 2 Digs, 3 Patches, 1 Crack
+   Computed PCI: 58.0 / 100
+   Recommended RL Action: Preventive Repair Required (30-day window)
+   --------------------------------------------------
+
+
+
+
+
+
+Prompt 7: Streamlit Control & Visualization Dashboard
+Act as a Full-Stack Engineer. Create an interactive Streamlit UI in `/dashboard/app.py` for visualizing road inspection results.
+
+Requirements:
+1. File Uploader widget allowing users to upload a recorded road inspection video (`.mp4`).
+2. Video playback player alongside a real-time status card showing current frame metrics.
+3. Summary Dashboard showing:
+   - Gauge chart or progress bar for overall Road PCI Score.
+   - Bar chart showing breakdown of detected defects (Digs vs. Patches vs. Cracks vs. Potholes).
+   - Alert banner displaying the final RL Predictive Maintenance Recommendation (Color coded: Green = Good, Yellow = Preventive Repair, Red = Critical Resurfacing Required).
+4. Export button to download the inspection report as a JSON or CSV file.
+
+
+
+

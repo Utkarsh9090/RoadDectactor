@@ -1,0 +1,117 @@
+"""Configuration and logging package for the Smart Road Detection platform."""
+
+from __future__ import annotations
+
+from config.logger import get_logger, setup_logging
+from config.settings import Settings, settings
+
+# Re-export key constants for package-level access
+BASE_DIR = settings.BASE_DIR
+DATA_DIR = settings.DATA_DIR
+VIDEO_INPUT_DIR = settings.VIDEO_INPUT_DIR
+VIDEO_INPUT_PATH = settings.VIDEO_INPUT_PATH
+MODEL_SAVE_DIR = settings.MODEL_SAVE_DIR
+OUTPUT_DIR = settings.OUTPUT_DIR
+SAMPLE_VIDEOS_DIR = settings.DATA_DIR / "sample_videos"
+MODELS_DIR = settings.MODEL_SAVE_DIR
+
+FRAME_SKIP = settings.FRAME_SKIP
+FRAME_SKIP_RATE = settings.FRAME_SKIP
+DEFAULT_FPS = settings.DEFAULT_FPS
+FRAMES_PER_SEGMENT = settings.FRAMES_PER_SEGMENT
+FRAME_WIDTH = settings.FRAME_WIDTH
+FRAME_HEIGHT = settings.FRAME_HEIGHT
+CONFIDENCE_THRESHOLD = settings.CONFIDENCE_THRESHOLD
+IOU_THRESHOLD = settings.IOU_THRESHOLD
+
+DIG_PENALTY = settings.DIG_PENALTY
+PATCH_PENALTY = settings.PATCH_PENALTY
+CRACK_PENALTY = settings.CRACK_PENALTY
+POTHOLE_PENALTY = settings.POTHOLE_PENALTY
+
+PCI_WEIGHTS = settings.PCI_WEIGHTS
+MAX_PCI = settings.MAX_PCI
+MIN_PCI = settings.MIN_PCI
+
+DEFECT_CLASSES = settings.DEFECT_CLASSES
+CLASS_NAME_TO_ID = settings.CLASS_NAME_TO_ID
+DEFECT_COLORS = settings.DEFECT_COLORS
+
+YOLO_MODEL_PATH = settings.YOLO_MODEL_PATH
+RL_MODEL_PATH = settings.RL_MODEL_PATH
+DEFAULT_FALLBACK_YOLO = settings.DEFAULT_FALLBACK_YOLO
+
+RL_STATE_DIM = settings.RL_STATE_DIM
+RL_OBS_LOW = settings.RL_OBS_LOW
+RL_OBS_HIGH = settings.RL_OBS_HIGH
+
+ACTION_DO_NOTHING = 0
+ACTION_PREVENTIVE = 1
+ACTION_MAJOR_RESURFACING = 2
+
+RL_ACTION_NAMES = settings.RL_ACTION_NAMES
+RL_ACTION_COSTS = settings.RL_ACTION_COSTS
+RL_FAILURE_PENALTY = settings.RL_FAILURE_PENALTY
+RL_CRITICAL_PCI_THRESHOLD = settings.RL_CRITICAL_PCI_THRESHOLD
+RL_PREVENTIVE_PCI_BOOST = settings.RL_PREVENTIVE_PCI_BOOST
+RL_MAX_EPISODE_AGE = settings.RL_MAX_EPISODE_AGE
+
+API_HOST = settings.API_HOST
+API_PORT = settings.API_PORT
+
+LOG_LEVEL = settings.LOG_LEVEL
+LOG_FORMAT = settings.LOG_FORMAT
+LOG_DATE_FORMAT = settings.LOG_DATE_FORMAT
+
+__all__ = [
+    "Settings",
+    "settings",
+    "get_logger",
+    "setup_logging",
+    "BASE_DIR",
+    "DATA_DIR",
+    "VIDEO_INPUT_DIR",
+    "VIDEO_INPUT_PATH",
+    "MODEL_SAVE_DIR",
+    "OUTPUT_DIR",
+    "SAMPLE_VIDEOS_DIR",
+    "MODELS_DIR",
+    "FRAME_SKIP",
+    "FRAME_SKIP_RATE",
+    "DEFAULT_FPS",
+    "FRAMES_PER_SEGMENT",
+    "FRAME_WIDTH",
+    "FRAME_HEIGHT",
+    "CONFIDENCE_THRESHOLD",
+    "IOU_THRESHOLD",
+    "DIG_PENALTY",
+    "PATCH_PENALTY",
+    "CRACK_PENALTY",
+    "POTHOLE_PENALTY",
+    "PCI_WEIGHTS",
+    "MAX_PCI",
+    "MIN_PCI",
+    "DEFECT_CLASSES",
+    "CLASS_NAME_TO_ID",
+    "DEFECT_COLORS",
+    "YOLO_MODEL_PATH",
+    "RL_MODEL_PATH",
+    "DEFAULT_FALLBACK_YOLO",
+    "RL_STATE_DIM",
+    "RL_OBS_LOW",
+    "RL_OBS_HIGH",
+    "ACTION_DO_NOTHING",
+    "ACTION_PREVENTIVE",
+    "ACTION_MAJOR_RESURFACING",
+    "RL_ACTION_NAMES",
+    "RL_ACTION_COSTS",
+    "RL_FAILURE_PENALTY",
+    "RL_CRITICAL_PCI_THRESHOLD",
+    "RL_PREVENTIVE_PCI_BOOST",
+    "RL_MAX_EPISODE_AGE",
+    "API_HOST",
+    "API_PORT",
+    "LOG_LEVEL",
+    "LOG_FORMAT",
+    "LOG_DATE_FORMAT",
+]

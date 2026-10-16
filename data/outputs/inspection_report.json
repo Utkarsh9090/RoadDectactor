@@ -1,0 +1,62 @@
+{
+  "status": "success",
+  "filename": "sample_road.mp4",
+  "total_segments_analyzed": 2,
+  "summary": {
+    "overall_pci": 0.0,
+    "overall_condition": "Critical",
+    "recommended_action": "Major Resurfacing Required",
+    "total_defects": {
+      "digs": 13,
+      "patches": 0,
+      "cracks": 56,
+      "potholes": 10
+    }
+  },
+  "segment_details": [
+    {
+      "segment_id": 1,
+      "frame_range": "0 - 100",
+      "pci_score": 0.0,
+      "condition": "Critical",
+      "defects": {
+        "digs": 5,
+        "patches": 0,
+        "cracks": 28,
+        "potholes": 5
+      },
+      "rl_state_vector": [
+        0.0,
+        5.0,
+        0.0,
+        28.0,
+        3.0
+      ],
+      "rl_recommended_action": 2,
+      "action_name": "Major Resurfacing",
+      "action_guidance": "Major Resurfacing Required (Immediate reconstruction priority)"
+    },
+    {
+      "segment_id": 2,
+      "frame_range": "100 - 200",
+      "pci_score": 0.0,
+      "condition": "Critical",
+      "defects": {
+        "digs": 8,
+        "patches": 0,
+        "cracks": 28,
+        "potholes": 5
+      },
+      "rl_state_vector": [
+        0.0,
+        8.0,
+        0.0,
+        28.0,
+        3.0
+      ],
+      "rl_recommended_action": 2,
+      "action_name": "Major Resurfacing",
+      "action_guidance": "Major Resurfacing Required (Immediate reconstruction priority)"
+    }
+  ]
+}

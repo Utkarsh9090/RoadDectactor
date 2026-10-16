@@ -1,0 +1,28 @@
+# Computer Vision & Image Processing
+opencv-python>=4.8.0.76
+ultralytics>=8.1.0
+torch>=2.1.0
+torchvision>=0.16.0
+pillow>=10.0.0
+
+# Reinforcement Learning & Math
+gymnasium>=0.29.0
+stable-baselines3>=2.2.1
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Backend API & Server
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.5.0
+python-multipart>=0.0.6
+
+# Web Dashboard & Visualization
+streamlit>=1.30.0
+plotly>=5.18.0
+matplotlib>=3.8.0
+
+# Utilities
+pyyaml>=6.0.1
+requests>=2.31.0
+pytest>=8.0.0
