@@ -253,7 +253,12 @@ def render_video_inspection_page(detector: RoadDefectDetector, rl_model: Optiona
         st.subheader("1. Source Video Selection")
         source_option = st.radio(
             "Choose Video Source:",
-            ["Use Sample Inspection Video (Built-in)", "Upload Custom Video (.mp4 / .avi)"],
+            [
+                "Use Sample Inspection Video (Built-in)",
+                "Upload Video / Mobile Camera (.mp4 / .mov)",
+                "Record Live Video Clip via OpenCV Camera",
+                "Snap Instant Photo via Camera",
+            ],
         )
 
         target_video_path: Optional[str] = None
@@ -266,24 +271,96 @@ def render_video_inspection_page(detector: RoadDefectDetector, rl_model: Optiona
                 st.success(f"Loaded built-in test video: `{sample_file.name}`")
             else:
                 st.error("Sample video not found. Please upload a file.")
-        else:
-            uploaded_file = st.file_uploader("Upload Road Dashcam Video", type=["mp4", "avi", "mov"])
+
+        elif source_option == "Upload Video / Mobile Camera (.mp4 / .mov)":
+            st.caption("📱 *Tip for Mobile:* Tapping below lets you record directly using your phone's camera.")
+            uploaded_file = st.file_uploader("Upload or Record Road Video", type=["mp4", "avi", "mov"])
             if uploaded_file is not None:
-                # Save uploaded file to temp file
                 tfile = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
                 tfile.write(uploaded_file.read())
                 tfile.close()
                 target_video_path = tfile.name
-                st.success(f"Uploaded: `{uploaded_file.name}`")
+                st.success(f"Loaded: `{uploaded_file.name}`")
 
-        run_btn = st.button("🚀 Run AI Road Inspection", type="primary", use_container_width=True)
+        elif source_option == "Record Live Video Clip via OpenCV Camera":
+            cam_index = st.number_input("Camera Index (0 for built-in webcam, 1 for USB):", min_value=0, max_value=5, value=0)
+            rec_seconds = st.slider("Recording Duration (seconds):", 2, 10, 4)
+            if st.button("🔴 Record Video via OpenCV"):
+                with st.spinner("Recording from camera via OpenCV..."):
+                    cap = cv2.VideoCapture(int(cam_index))
+                    if not cap.isOpened():
+                        st.error(f"Could not open camera device {cam_index}. Check device connection and permissions.")
+                    else:
+                        tfile = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
+                        fps = 30
+                        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)) or 640
+                        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)) or 480
+                        fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+                        writer = cv2.VideoWriter(tfile.name, fourcc, fps, (width, height))
+                        total_frames = rec_seconds * fps
+
+                        for _ in range(total_frames):
+                            ret, frame = cap.read()
+                            if not ret:
+                                break
+                            writer.write(frame)
+
+                        cap.release()
+                        writer.release()
+                        st.session_state["recorded_clip_path"] = tfile.name
+                        st.success(f"Recorded {rec_seconds}s clip ({total_frames} frames) successfully!")
+
+            if "recorded_clip_path" in st.session_state:
+                target_video_path = st.session_state["recorded_clip_path"]
+
+        elif source_option == "Snap Instant Photo via Camera":
+            st.caption("📸 Take an instant photo using your phone or laptop camera for single-frame defect analysis.")
+            cam_photo = st.camera_input("Capture road surface photo")
+            if cam_photo is not None:
+                file_bytes = np.asarray(bytearray(cam_photo.read()), dtype=np.uint8)
+                img = cv2.imdecode(file_bytes, 1)
+                with st.spinner("Analyzing photo with OpenCV and YOLO..."):
+                    annotated_img, counts, _ = detector.detect_frame(img, frame_idx=1)
+                    pci = calculate_pci(counts)
+                    cat = get_pci_condition_category(pci)
+                    state_v = build_rl_state(pci, counts, road_age_val)
+                    if rl_model is not None:
+                        act_idx, _ = rl_model.predict(state_v, deterministic=True)
+                        act_int = int(act_idx)
+                    else:
+                        act_int = 2 if pci < 40 else (1 if pci < 70 else 0)
+                    act_name = RL_ACTION_NAMES.get(act_int, "Do Nothing")
+
+                    st.session_state["photo_results"] = {
+                        "annotated_rgb": cv2.cvtColor(annotated_img, cv2.COLOR_BGR2RGB),
+                        "counts": counts,
+                        "pci": pci,
+                        "category": cat,
+                        "action_name": act_name,
+                        "action_int": act_int,
+                    }
+
+        if source_option != "Snap Instant Photo via Camera":
+            run_btn = st.button("🚀 Run AI Road Inspection", type="primary", use_container_width=True)
+        else:
+            run_btn = False
 
     with col2:
-        st.subheader("2. Video Preview")
-        if target_video_path:
+        st.subheader("2. Video / Camera Preview")
+        if source_option == "Snap Instant Photo via Camera" and "photo_results" in st.session_state:
+            res = st.session_state["photo_results"]
+            st.image(res["annotated_rgb"], caption=f"Analyzed Road Photo (PCI: {res['pci']}/100)", use_container_width=True)
+            if res["action_int"] == 2:
+                st.markdown(f'<div class="alert-red"><h3>🔴 Action: {res["action_name"]}</h3><p>Critical structural damage detected (PCI: {res["pci"]}/100)</p></div>', unsafe_allow_html=True)
+            elif res["action_int"] == 1:
+                st.markdown(f'<div class="alert-yellow"><h3>🟡 Action: {res["action_name"]}</h3><p>Preventive maintenance recommended (PCI: {res["pci"]}/100)</p></div>', unsafe_allow_html=True)
+            else:
+                st.markdown(f'<div class="alert-green"><h3>🟢 Action: {res["action_name"]}</h3><p>Surface in good condition (PCI: {res["pci"]}/100)</p></div>', unsafe_allow_html=True)
+            st.metric("Detected Defect Occurrences", f"Digs: {res['counts'].get('digs',0)} | Patches: {res['counts'].get('patches',0)} | Cracks: {res['counts'].get('cracks',0)} | Potholes: {res['counts'].get('potholes',0)}")
+        elif target_video_path:
             st.video(target_video_path)
         else:
-            st.info("Please select or upload a video file to begin analysis.")
+            st.info("Select a video, record a clip, or snap a camera photo to begin analysis.")
 
     if run_btn and target_video_path:
         with st.spinner("Processing video frames with OpenCV and YOLO..."):
