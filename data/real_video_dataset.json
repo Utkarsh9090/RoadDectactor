@@ -1,0 +1,991 @@
+{
+  "timestamp": "2026-10-21T23:11:52Z",
+  "total_videos": 3,
+  "total_empirical_segments": 37,
+  "videos": [
+    {
+      "filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "filepath": "D:\\Workspace\\Projects\\RoadDetector\\videos\\4695859-uhd_3840_2160_30fps.mp4",
+      "resolution": "3840x2160",
+      "fps": 29.97002997002997,
+      "total_frames": 1231,
+      "extraction_time_sec": 36.26,
+      "summary": {
+        "overall_pci": 59.2,
+        "total_defects": {
+          "digs": 0,
+          "patches": 0,
+          "cracks": 0,
+          "potholes": 17
+        }
+      },
+      "segment_details": [
+        {
+          "segment_id": 1,
+          "frame_start": 0,
+          "frame_end": 100,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 2,
+          "frame_start": 100,
+          "frame_end": 200,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 3,
+          "frame_start": 200,
+          "frame_end": 300,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "pci_score": 95.2,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 4,
+          "frame_start": 300,
+          "frame_end": 400,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 5,
+          "frame_start": 400,
+          "frame_end": 500,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 1
+          },
+          "pci_score": 97.6,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 6,
+          "frame_start": 500,
+          "frame_end": 600,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "pci_score": 95.2,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 7,
+          "frame_start": 600,
+          "frame_end": 700,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "pci_score": 95.2,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 8,
+          "frame_start": 700,
+          "frame_end": 800,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "pci_score": 95.2,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 9,
+          "frame_start": 800,
+          "frame_end": 900,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "pci_score": 95.2,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 10,
+          "frame_start": 900,
+          "frame_end": 1000,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 3
+          },
+          "pci_score": 92.8,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 11,
+          "frame_start": 1000,
+          "frame_end": 1100,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "pci_score": 95.2,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 12,
+          "frame_start": 1100,
+          "frame_end": 1200,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 1
+          },
+          "pci_score": 97.6,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 13,
+          "frame_start": 1200,
+          "frame_end": 1231,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        }
+      ]
+    },
+    {
+      "filename": "16433509_2160_3840_60fps.mp4",
+      "filepath": "D:\\Workspace\\Projects\\RoadDetector\\videos\\16433509_2160_3840_60fps.mp4",
+      "resolution": "2160x3840",
+      "fps": 60.0,
+      "total_frames": 996,
+      "extraction_time_sec": 67.24,
+      "summary": {
+        "overall_pci": 100.0,
+        "total_defects": {
+          "digs": 0,
+          "patches": 0,
+          "cracks": 0,
+          "potholes": 0
+        }
+      },
+      "segment_details": [
+        {
+          "segment_id": 1,
+          "frame_start": 0,
+          "frame_end": 100,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 2,
+          "frame_start": 100,
+          "frame_end": 200,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 3,
+          "frame_start": 200,
+          "frame_end": 300,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 4,
+          "frame_start": 300,
+          "frame_end": 400,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 5,
+          "frame_start": 400,
+          "frame_end": 500,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 6,
+          "frame_start": 500,
+          "frame_end": 600,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 7,
+          "frame_start": 600,
+          "frame_end": 700,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 8,
+          "frame_start": 700,
+          "frame_end": 800,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 9,
+          "frame_start": 800,
+          "frame_end": 900,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 10,
+          "frame_start": 900,
+          "frame_end": 996,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        }
+      ]
+    },
+    {
+      "filename": "20258332-hd_1080_1920_30fps.mp4",
+      "filepath": "D:\\Workspace\\Projects\\RoadDetector\\videos\\20258332-hd_1080_1920_30fps.mp4",
+      "resolution": "1080x1920",
+      "fps": 29.97002997002997,
+      "total_frames": 1308,
+      "extraction_time_sec": 54.71,
+      "summary": {
+        "overall_pci": 88.8,
+        "total_defects": {
+          "digs": 0,
+          "patches": 0,
+          "cracks": 14,
+          "potholes": 0
+        }
+      },
+      "segment_details": [
+        {
+          "segment_id": 1,
+          "frame_start": 0,
+          "frame_end": 100,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 2,
+          "frame_start": 100,
+          "frame_end": 200,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 3,
+          "frame_start": 200,
+          "frame_end": 300,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 2,
+            "potholes": 0
+          },
+          "pci_score": 98.4,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 4,
+          "frame_start": 300,
+          "frame_end": 400,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 3,
+            "potholes": 0
+          },
+          "pci_score": 97.6,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 5,
+          "frame_start": 400,
+          "frame_end": 500,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 2,
+            "potholes": 0
+          },
+          "pci_score": 98.4,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 6,
+          "frame_start": 500,
+          "frame_end": 600,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 7,
+          "frame_start": 600,
+          "frame_end": 700,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 1,
+            "potholes": 0
+          },
+          "pci_score": 99.2,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 8,
+          "frame_start": 700,
+          "frame_end": 800,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 1,
+            "potholes": 0
+          },
+          "pci_score": 99.2,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 9,
+          "frame_start": 800,
+          "frame_end": 900,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 2,
+            "potholes": 0
+          },
+          "pci_score": 98.4,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 10,
+          "frame_start": 900,
+          "frame_end": 1000,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 11,
+          "frame_start": 1000,
+          "frame_end": 1100,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 12,
+          "frame_start": 1100,
+          "frame_end": 1200,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 2,
+            "potholes": 0
+          },
+          "pci_score": 98.4,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 13,
+          "frame_start": 1200,
+          "frame_end": 1300,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 1,
+            "potholes": 0
+          },
+          "pci_score": 99.2,
+          "condition": "Good"
+        },
+        {
+          "segment_id": 14,
+          "frame_start": 1300,
+          "frame_end": 1308,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0,
+          "condition": "Good"
+        }
+      ]
+    }
+  ],
+  "empirical_segments": [
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 1,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 2,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 3,
+      "pci_score": 95.2,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 2
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 4,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 5,
+      "pci_score": 97.6,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 1
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 6,
+      "pci_score": 95.2,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 2
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 7,
+      "pci_score": 95.2,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 2
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 8,
+      "pci_score": 95.2,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 2
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 9,
+      "pci_score": 95.2,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 2
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 10,
+      "pci_score": 92.8,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 3
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 11,
+      "pci_score": 95.2,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 2
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 12,
+      "pci_score": 97.6,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 1
+      }
+    },
+    {
+      "video_filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "segment_id": 13,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "16433509_2160_3840_60fps.mp4",
+      "segment_id": 1,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "16433509_2160_3840_60fps.mp4",
+      "segment_id": 2,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "16433509_2160_3840_60fps.mp4",
+      "segment_id": 3,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "16433509_2160_3840_60fps.mp4",
+      "segment_id": 4,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "16433509_2160_3840_60fps.mp4",
+      "segment_id": 5,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "16433509_2160_3840_60fps.mp4",
+      "segment_id": 6,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "16433509_2160_3840_60fps.mp4",
+      "segment_id": 7,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "16433509_2160_3840_60fps.mp4",
+      "segment_id": 8,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "16433509_2160_3840_60fps.mp4",
+      "segment_id": 9,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "16433509_2160_3840_60fps.mp4",
+      "segment_id": 10,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 1,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 2,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 3,
+      "pci_score": 98.4,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 2,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 4,
+      "pci_score": 97.6,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 3,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 5,
+      "pci_score": 98.4,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 2,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 6,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 7,
+      "pci_score": 99.2,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 1,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 8,
+      "pci_score": 99.2,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 1,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 9,
+      "pci_score": 98.4,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 2,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 10,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 11,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 12,
+      "pci_score": 98.4,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 2,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 13,
+      "pci_score": 99.2,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 1,
+        "potholes": 0
+      }
+    },
+    {
+      "video_filename": "20258332-hd_1080_1920_30fps.mp4",
+      "segment_id": 14,
+      "pci_score": 100.0,
+      "condition": "Good",
+      "defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      }
+    }
+  ]
+}

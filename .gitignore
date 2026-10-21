@@ -28,3 +28,8 @@ ehthumbs.db
 
 # Temporary outputs
 *.log
+scratch/
+
+# Large media files (exceeding GitHub 100MB push limit)
+videos/*.mp4
+data/videos/*.mp4

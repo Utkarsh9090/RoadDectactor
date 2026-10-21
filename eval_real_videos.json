@@ -1,0 +1,647 @@
+{
+  "timestamp": "2026-10-21T23:12:19Z",
+  "model_path": "D:\\Workspace\\Projects\\RoadDetector\\data\\models\\dqn_road_policy.zip",
+  "test_road_age_years": 3.5,
+  "video_evaluations": [
+    {
+      "filename": "4695859-uhd_3840_2160_30fps.mp4",
+      "resolution": "3840x2160",
+      "total_segments": 13,
+      "average_pci": 96.9,
+      "overall_condition": "Good",
+      "action_distribution": {
+        "0": 13,
+        "1": 0,
+        "2": 0
+      },
+      "total_intervention_cost": 0.0,
+      "primary_corridor_decision": "Do Nothing (Corridor in Good Health)",
+      "segment_evaluations": [
+        {
+          "segment_id": 1,
+          "frame_start": 0,
+          "frame_end": 100,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 2,
+          "frame_start": 100,
+          "frame_end": 200,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 3,
+          "frame_start": 200,
+          "frame_end": 300,
+          "pci_score": 95.2,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 4,
+          "frame_start": 300,
+          "frame_end": 400,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 5,
+          "frame_start": 400,
+          "frame_end": 500,
+          "pci_score": 97.6,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 1
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 6,
+          "frame_start": 500,
+          "frame_end": 600,
+          "pci_score": 95.2,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 7,
+          "frame_start": 600,
+          "frame_end": 700,
+          "pci_score": 95.2,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 8,
+          "frame_start": 700,
+          "frame_end": 800,
+          "pci_score": 95.2,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 9,
+          "frame_start": 800,
+          "frame_end": 900,
+          "pci_score": 95.2,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 10,
+          "frame_start": 900,
+          "frame_end": 1000,
+          "pci_score": 92.8,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 3
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 11,
+          "frame_start": 1000,
+          "frame_end": 1100,
+          "pci_score": 95.2,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 2
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 12,
+          "frame_start": 1100,
+          "frame_end": 1200,
+          "pci_score": 97.6,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 1
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 13,
+          "frame_start": 1200,
+          "frame_end": 1231,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        }
+      ]
+    },
+    {
+      "filename": "16433509_2160_3840_60fps.mp4",
+      "resolution": "2160x3840",
+      "total_segments": 10,
+      "average_pci": 100.0,
+      "overall_condition": "Good",
+      "action_distribution": {
+        "0": 10,
+        "1": 0,
+        "2": 0
+      },
+      "total_intervention_cost": 0.0,
+      "primary_corridor_decision": "Do Nothing (Corridor in Good Health)",
+      "segment_evaluations": [
+        {
+          "segment_id": 1,
+          "frame_start": 0,
+          "frame_end": 100,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 2,
+          "frame_start": 100,
+          "frame_end": 200,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 3,
+          "frame_start": 200,
+          "frame_end": 300,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 4,
+          "frame_start": 300,
+          "frame_end": 400,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 5,
+          "frame_start": 400,
+          "frame_end": 500,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 6,
+          "frame_start": 500,
+          "frame_end": 600,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 7,
+          "frame_start": 600,
+          "frame_end": 700,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 8,
+          "frame_start": 700,
+          "frame_end": 800,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 9,
+          "frame_start": 800,
+          "frame_end": 900,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 10,
+          "frame_start": 900,
+          "frame_end": 996,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        }
+      ]
+    },
+    {
+      "filename": "20258332-hd_1080_1920_30fps.mp4",
+      "resolution": "1080x1920",
+      "total_segments": 14,
+      "average_pci": 99.2,
+      "overall_condition": "Good",
+      "action_distribution": {
+        "0": 14,
+        "1": 0,
+        "2": 0
+      },
+      "total_intervention_cost": 0.0,
+      "primary_corridor_decision": "Do Nothing (Corridor in Good Health)",
+      "segment_evaluations": [
+        {
+          "segment_id": 1,
+          "frame_start": 0,
+          "frame_end": 100,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 2,
+          "frame_start": 100,
+          "frame_end": 200,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 3,
+          "frame_start": 200,
+          "frame_end": 300,
+          "pci_score": 98.4,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 2,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 4,
+          "frame_start": 300,
+          "frame_end": 400,
+          "pci_score": 97.6,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 3,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 5,
+          "frame_start": 400,
+          "frame_end": 500,
+          "pci_score": 98.4,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 2,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 6,
+          "frame_start": 500,
+          "frame_end": 600,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 7,
+          "frame_start": 600,
+          "frame_end": 700,
+          "pci_score": 99.2,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 1,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 8,
+          "frame_start": 700,
+          "frame_end": 800,
+          "pci_score": 99.2,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 1,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 9,
+          "frame_start": 800,
+          "frame_end": 900,
+          "pci_score": 98.4,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 2,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 10,
+          "frame_start": 900,
+          "frame_end": 1000,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 11,
+          "frame_start": 1000,
+          "frame_end": 1100,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 12,
+          "frame_start": 1100,
+          "frame_end": 1200,
+          "pci_score": 98.4,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 2,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 13,
+          "frame_start": 1200,
+          "frame_end": 1300,
+          "pci_score": 99.2,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 1,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        },
+        {
+          "segment_id": 14,
+          "frame_start": 1300,
+          "frame_end": 1308,
+          "pci_score": 100.0,
+          "condition": "Good",
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "recommended_action_code": 0,
+          "recommended_action_name": "Do Nothing (Optimal Condition)",
+          "action_cost": 0.0
+        }
+      ]
+    }
+  ]
+}

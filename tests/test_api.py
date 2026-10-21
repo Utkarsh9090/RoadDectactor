@@ -35,9 +35,9 @@ def test_predict_action_endpoint() -> None:
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "success"
-    # Deduct value: (2*12) + (3*8) + (4*4) + (1*15) = 24 + 24 + 16 + 15 = 79 -> PCI = 21.0
-    assert data["pci_score"] == 21.0
-    assert data["condition"] == "Critical"
+    # Deduct value: (2*2.0) + (3*1.5) + (4*0.8) + (1*2.4) = 4.0 + 4.5 + 3.2 + 2.4 = 14.1 -> PCI = 85.9
+    assert data["pci_score"] == 85.9
+    assert data["condition"] == "Good"
     assert data["rl_recommended_action"] in (0, 1, 2)
     assert len(data["state_vector"]) == 5
 
@@ -74,3 +74,30 @@ def test_analyze_video_endpoint() -> None:
     assert "defects" in first_segment
     assert "rl_recommended_action" in first_segment
     assert "action_name" in first_segment
+
+
+def test_list_videos_endpoint() -> None:
+    """Tests the /api/v1/videos catalog endpoint."""
+    response = client.get("/api/v1/videos")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) >= 3
+    filenames = [v["filename"] for v in data]
+    assert "4695859-uhd_3840_2160_30fps.mp4" in filenames
+    assert "16433509_2160_3840_60fps.mp4" in filenames
+    assert "20258332-hd_1080_1920_30fps.mp4" in filenames
+
+
+def test_analyze_stored_video_endpoint() -> None:
+    """Tests /api/v1/analyze-stored-video with sample_road.mp4."""
+    response = client.post(
+        "/api/v1/analyze-stored-video",
+        params={"video_name": "sample_road.mp4", "road_age_years": 3.0},
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert data["filename"] == "sample_road.mp4"
+    assert "summary" in data
+    assert "overall_pci" in data["summary"]

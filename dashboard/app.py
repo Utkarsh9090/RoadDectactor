@@ -92,6 +92,15 @@ st.markdown(
         font-weight: 600;
         margin-bottom: 1rem;
     }
+    .alert-orange {
+        background-color: rgba(249, 115, 22, 0.15);
+        border: 1px solid #f97316;
+        color: #fb923c;
+        padding: 16px;
+        border-radius: 10px;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
     .alert-red {
         background-color: rgba(239, 68, 68, 0.15);
         border: 1px solid #ef4444;
@@ -150,9 +159,10 @@ def render_pci_gauge(pci_score: float) -> go.Figure:
                 "borderwidth": 1,
                 "bordercolor": "#334155",
                 "steps": [
-                    {"range": [0, 40], "color": "rgba(239, 68, 68, 0.45)"},      # Critical (Red)
-                    {"range": [40, 70], "color": "rgba(234, 179, 8, 0.45)"},     # Preventive (Yellow)
-                    {"range": [70, 100], "color": "rgba(34, 197, 94, 0.45)"},    # Good (Green)
+                    {"range": [0, 40], "color": "rgba(239, 68, 68, 0.45)"},      # Repair Immediate (Red)
+                    {"range": [40, 60], "color": "rgba(249, 115, 22, 0.45)"},    # Repair It (Orange)
+                    {"range": [60, 80], "color": "rgba(234, 179, 8, 0.45)"},     # Maintain Properly (Yellow)
+                    {"range": [80, 100], "color": "rgba(34, 197, 94, 0.45)"},    # Good Condition (Green)
                 ],
                 "threshold": {
                     "line": {"color": "#ffffff", "width": 4},
@@ -245,6 +255,42 @@ def main() -> None:
         render_architecture_page()
 
 
+def get_available_stored_videos() -> Dict[str, Dict[str, Any]]:
+    """Discovers stored real project videos and benchmark samples."""
+    catalog: Dict[str, Dict[str, Any]] = {}
+    real_vids = {
+        "4695859-uhd_3840_2160_30fps.mp4": {
+            "title": "🌲 Scenic Paved Forest Highway (4K UHD)",
+            "desc": "3840x2160, 30fps, 41.1s (1231 frames, 121 MB) • Smooth asphalt corridor",
+            "path": PROJECT_ROOT / "videos" / "4695859-uhd_3840_2160_30fps.mp4",
+        },
+        "16433509_2160_3840_60fps.mp4": {
+            "title": "⛰️ Mountain Pass Trail & Ridge (4K 60fps)",
+            "desc": "2160x3840, 60fps, 16.6s (996 frames, 96 MB) • High elevation dynamic",
+            "path": PROJECT_ROOT / "videos" / "16433509_2160_3840_60fps.mp4",
+        },
+        "20258332-hd_1080_1920_30fps.mp4": {
+            "title": "🏙️ Urban Arterial Dashcam (1080p Vertical)",
+            "desc": "1080x1920, 30fps, 43.6s (1308 frames, 28 MB) • Multi-lane urban pavement with joints",
+            "path": PROJECT_ROOT / "videos" / "20258332-hd_1080_1920_30fps.mp4",
+        },
+    }
+    for fname, info in real_vids.items():
+        if info["path"].exists():
+            catalog[info["title"]] = info
+
+    if SAMPLE_VIDEOS_DIR.exists():
+        for p in SAMPLE_VIDEOS_DIR.glob("*.mp4"):
+            key = f"🎞️ Sample: {p.name}"
+            if key not in catalog:
+                catalog[key] = {
+                    "title": key,
+                    "desc": f"Built-in sample ({round(p.stat().st_size / (1024*1024), 2)} MB)",
+                    "path": p,
+                }
+    return catalog
+
+
 def render_video_inspection_page(detector: RoadDefectDetector, rl_model: Optional[DQN]) -> None:
     """Renders the video upload, processing, and visual analysis dashboard."""
     col1, col2 = st.columns([1, 2])
@@ -254,27 +300,40 @@ def render_video_inspection_page(detector: RoadDefectDetector, rl_model: Optiona
         source_option = st.radio(
             "Choose Video Source:",
             [
-                "Use Sample Inspection Video (Built-in)",
-                "Upload Video / Mobile Camera (.mp4 / .mov)",
-                "Record Live Video Clip via OpenCV Camera",
-                "Snap Instant Photo via Camera",
+                "🎬 Real Highway & Urban Videos (Project Dataset)",
+                "📁 Upload Video from System (.mp4 / .mov / .avi)",
+                "📹 Record Video Live via Camera (Real-Time)",
+                "📸 Snap Instant Photo via Camera",
             ],
         )
 
         target_video_path: Optional[str] = None
+        target_video_filename: Optional[str] = None
+        use_cached: bool = False
         road_age_val = st.slider("Estimated Road Surface Age (Years):", 0.0, 15.0, 3.5, 0.5)
 
-        if source_option == "Use Sample Inspection Video (Built-in)":
-            sample_file = SAMPLE_VIDEOS_DIR / "sample_road.mp4"
-            if sample_file.exists():
-                target_video_path = str(sample_file)
-                st.success(f"Loaded built-in test video: `{sample_file.name}`")
+        if source_option == "🎬 Real Highway & Urban Videos (Project Dataset)":
+            catalog = get_available_stored_videos()
+            if catalog:
+                selected_title = st.selectbox(
+                    "Select Real Road Corridor Video:",
+                    options=list(catalog.keys()),
+                )
+                chosen = catalog[selected_title]
+                target_video_path = str(chosen["path"])
+                target_video_filename = chosen["path"].name
+                st.caption(f"ℹ️ *{chosen['desc']}*")
+                use_cached = st.checkbox(
+                    "⚡ Use pre-computed AI inspection cache (Instant Result)",
+                    value=True,
+                    help="Instantly loads high-precision frame detections and evaluates with the trained DQN policy.",
+                )
             else:
-                st.error("Sample video not found. Please upload a file.")
+                st.warning("No stored videos found in videos/ directory.")
 
-        elif source_option == "Upload Video / Mobile Camera (.mp4 / .mov)":
-            st.caption("📱 *Tip for Mobile:* Tapping below lets you record directly using your phone's camera.")
-            uploaded_file = st.file_uploader("Upload or Record Road Video", type=["mp4", "avi", "mov"])
+        elif source_option == "📁 Upload Video from System (.mp4 / .mov / .avi)":
+            st.caption("💻 *Upload inspection video from your local computer or phone storage.*")
+            uploaded_file = st.file_uploader("Select Road Inspection Video", type=["mp4", "avi", "mov", "mkv"])
             if uploaded_file is not None:
                 tfile = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
                 tfile.write(uploaded_file.read())
@@ -282,33 +341,40 @@ def render_video_inspection_page(detector: RoadDefectDetector, rl_model: Optiona
                 target_video_path = tfile.name
                 st.success(f"Loaded: `{uploaded_file.name}`")
 
-        elif source_option == "Record Live Video Clip via OpenCV Camera":
-            cam_index = st.number_input("Camera Index (0 for built-in webcam, 1 for USB):", min_value=0, max_value=5, value=0)
+        elif source_option == "📹 Record Video Live via Camera (Real-Time)":
+            st.caption("📹 *Record live inspection video with real-time viewfinder display.*")
+            cam_index = st.number_input("Camera Index (0 for built-in webcam, 1 for external USB):", min_value=0, max_value=5, value=0)
             rec_seconds = st.slider("Recording Duration (seconds):", 2, 10, 4)
-            if st.button("🔴 Record Video via OpenCV"):
-                with st.spinner("Recording from camera via OpenCV..."):
-                    cap = cv2.VideoCapture(int(cam_index))
-                    if not cap.isOpened():
-                        st.error(f"Could not open camera device {cam_index}. Check device connection and permissions.")
-                    else:
-                        tfile = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
-                        fps = 30
-                        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)) or 640
-                        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)) or 480
-                        fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-                        writer = cv2.VideoWriter(tfile.name, fourcc, fps, (width, height))
-                        total_frames = rec_seconds * fps
+            if st.button("🔴 Start Live Camera Recording", type="primary"):
+                cap = cv2.VideoCapture(int(cam_index))
+                if not cap.isOpened():
+                    st.error(f"Could not open camera device {cam_index}. Check device connection and permissions.")
+                else:
+                    tfile = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
+                    fps = 30
+                    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)) or 640
+                    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)) or 480
+                    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+                    writer = cv2.VideoWriter(tfile.name, fourcc, fps, (width, height))
+                    total_frames = rec_seconds * fps
 
-                        for _ in range(total_frames):
-                            ret, frame = cap.read()
-                            if not ret:
-                                break
-                            writer.write(frame)
+                    preview_box = st.empty()
+                    progress_rec = st.progress(0.0)
 
-                        cap.release()
-                        writer.release()
-                        st.session_state["recorded_clip_path"] = tfile.name
-                        st.success(f"Recorded {rec_seconds}s clip ({total_frames} frames) successfully!")
+                    for i in range(total_frames):
+                        ret, frame = cap.read()
+                        if not ret:
+                            break
+                        writer.write(frame)
+                        if i % 2 == 0:
+                            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                            preview_box.image(rgb_frame, caption=f"🔴 Recording in Real-Time... Frame {i+1}/{total_frames}", use_container_width=True)
+                            progress_rec.progress((i + 1) / total_frames)
+
+                    cap.release()
+                    writer.release()
+                    st.session_state["recorded_clip_path"] = tfile.name
+                    st.success(f"✅ Successfully recorded {rec_seconds}s clip ({total_frames} frames)!")
 
             if "recorded_clip_path" in st.session_state:
                 target_video_path = st.session_state["recorded_clip_path"]
@@ -328,7 +394,7 @@ def render_video_inspection_page(detector: RoadDefectDetector, rl_model: Optiona
                         act_idx, _ = rl_model.predict(state_v, deterministic=True)
                         act_int = int(act_idx)
                     else:
-                        act_int = 2 if pci < 40 else (1 if pci < 70 else 0)
+                        act_int = 2 if pci < 40 else (1 if pci < 80 else 0)
                     act_name = RL_ACTION_NAMES.get(act_int, "Do Nothing")
 
                     st.session_state["photo_results"] = {
@@ -349,13 +415,15 @@ def render_video_inspection_page(detector: RoadDefectDetector, rl_model: Optiona
         st.subheader("2. Video / Camera Preview")
         if source_option == "Snap Instant Photo via Camera" and "photo_results" in st.session_state:
             res = st.session_state["photo_results"]
-            st.image(res["annotated_rgb"], caption=f"Analyzed Road Photo (PCI: {res['pci']}/100)", use_container_width=True)
-            if res["action_int"] == 2:
-                st.markdown(f'<div class="alert-red"><h3>🔴 Action: {res["action_name"]}</h3><p>Critical structural damage detected (PCI: {res["pci"]}/100)</p></div>', unsafe_allow_html=True)
-            elif res["action_int"] == 1:
-                st.markdown(f'<div class="alert-yellow"><h3>🟡 Action: {res["action_name"]}</h3><p>Preventive maintenance recommended (PCI: {res["pci"]}/100)</p></div>', unsafe_allow_html=True)
+            st.image(res["annotated_rgb"], caption=f"Analyzed Road Photo (PCI: {res['pci']:.1f}/100)", use_container_width=True)
+            if res["pci"] < 40.0:
+                st.markdown(f'<div class="alert-red"><h3>🔴 Action: Repair Immediate</h3><p>Critical structural damage detected (PCI: {res["pci"]:.1f}/100)</p></div>', unsafe_allow_html=True)
+            elif res["pci"] < 60.0:
+                st.markdown(f'<div class="alert-orange"><h3>🟠 Action: Repair It</h3><p>Significant distress detected (PCI: {res["pci"]:.1f}/100)</p></div>', unsafe_allow_html=True)
+            elif res["pci"] < 80.0:
+                st.markdown(f'<div class="alert-yellow"><h3>🟡 Action: Maintain Properly</h3><p>Preventive maintenance recommended (PCI: {res["pci"]:.1f}/100)</p></div>', unsafe_allow_html=True)
             else:
-                st.markdown(f'<div class="alert-green"><h3>🟢 Action: {res["action_name"]}</h3><p>Surface in good condition (PCI: {res["pci"]}/100)</p></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="alert-green"><h3>🟢 Action: Good Condition</h3><p>Surface in good condition (PCI: {res["pci"]:.1f}/100)</p></div>', unsafe_allow_html=True)
             st.metric("Detected Defect Occurrences", f"Digs: {res['counts'].get('digs',0)} | Patches: {res['counts'].get('patches',0)} | Cracks: {res['counts'].get('cracks',0)} | Potholes: {res['counts'].get('potholes',0)}")
         elif target_video_path:
             st.video(target_video_path)
@@ -363,26 +431,46 @@ def render_video_inspection_page(detector: RoadDefectDetector, rl_model: Optiona
             st.info("Select a video, record a clip, or snap a camera photo to begin analysis.")
 
     if run_btn and target_video_path:
-        with st.spinner("Processing video frames with OpenCV and YOLO..."):
-            progress_bar = st.progress(0.0)
-            status_text = st.empty()
+        loaded_from_cache = False
+        if source_option == "🎬 Real Highway & Urban Videos (Project Dataset)" and use_cached and target_video_filename:
+            dataset_file = PROJECT_ROOT / "data" / "real_video_dataset.json"
+            if dataset_file.exists():
+                try:
+                    with open(dataset_file, "r", encoding="utf-8") as f:
+                        ds = json.load(f)
+                    for v in ds.get("videos", []):
+                        if v["filename"] == target_video_filename:
+                            st.session_state["inspection_report"] = {
+                                "summary": v.get("summary", {}),
+                                "segment_details": v.get("segment_details", []),
+                            }
+                            st.success(f"⚡ Loaded pre-computed AI inspection for `{target_video_filename}` ({len(v.get('segment_details', []))} segments)")
+                            loaded_from_cache = True
+                            break
+                except Exception as e:
+                    logger.debug("Cache read error: %s", e)
 
-            def progress_cb(current: int, total: int) -> None:
-                progress_bar.progress(min(1.0, current / max(1, total)))
-                status_text.text(f"Processing frame {current} of {total}...")
+        if not loaded_from_cache:
+            with st.spinner("Processing video frames with OpenCV and YOLO..."):
+                progress_bar = st.progress(0.0)
+                status_text = st.empty()
 
-            try:
-                report = detector.process_video(
-                    video_path=target_video_path,
-                    display=False,
-                    progress_callback=progress_cb,
-                )
-                progress_bar.progress(1.0)
-                status_text.text("Inspection complete!")
-                st.session_state["inspection_report"] = report
-            except Exception as exc:
-                st.error(f"Error during video processing: {exc}")
-                logger.error("Processing failed: %s", exc)
+                def progress_cb(current: int, total: int) -> None:
+                    progress_bar.progress(min(1.0, current / max(1, total)))
+                    status_text.text(f"Processing frame {current} of {total}...")
+
+                try:
+                    report = detector.process_video(
+                        video_path=target_video_path,
+                        display=False,
+                        progress_callback=progress_cb,
+                    )
+                    progress_bar.progress(1.0)
+                    status_text.text("Inspection complete!")
+                    st.session_state["inspection_report"] = report
+                except Exception as exc:
+                    st.error(f"Error during video processing: {exc}")
+                    logger.error("Processing failed: %s", exc)
 
     # Display results if available in session state
     if "inspection_report" in st.session_state:
@@ -405,7 +493,7 @@ def render_video_inspection_page(detector: RoadDefectDetector, rl_model: Optiona
                 action_idx, _ = rl_model.predict(state_vec, deterministic=True)
                 act_int = int(action_idx)
             else:
-                act_int = 2 if seg_pci < 40 else (1 if seg_pci < 70 else 0)
+                act_int = 2 if seg_pci < 40 else (1 if seg_pci < 80 else 0)
 
             act_name = RL_ACTION_NAMES.get(act_int, "Do Nothing")
             enriched_segments.append({
@@ -420,19 +508,23 @@ def render_video_inspection_page(detector: RoadDefectDetector, rl_model: Optiona
                 "RL Action": act_name,
             })
 
-        # Final RL Recommendation
-        if any(s["RL Action"] == "Major Resurfacing" for s in enriched_segments) or overall_pci < 40.0:
-            rec_action = "Major Resurfacing Required (Immediate Action)"
+        # Final Recommendation
+        if overall_pci < 40.0 or any(s["RL Action"] == "Major Resurfacing" for s in enriched_segments):
+            rec_action = "Repair Immediate (Emergency Resurfacing Required)"
             alert_class = "alert-red"
-            badge = "🔴 CRITICAL"
-        elif any(s["RL Action"] == "Preventive Repair" for s in enriched_segments) or overall_pci < 70.0:
-            rec_action = "Preventive Repair Required (30-day Window)"
+            badge = "🔴 REPAIR IMMEDIATE"
+        elif overall_pci < 60.0:
+            rec_action = "Repair It (Corrective Surface Repair Required)"
+            alert_class = "alert-orange"
+            badge = "🟠 REPAIR IT"
+        elif overall_pci < 80.0 or any(s["RL Action"] == "Preventive Repair" for s in enriched_segments):
+            rec_action = "Maintain Properly (Preventive Maintenance Required)"
             alert_class = "alert-yellow"
-            badge = "🟡 SCHEDULED REPAIR"
+            badge = "🟡 MAINTAIN PROPERLY"
         else:
-            rec_action = "Do Nothing (Pavement in Optimal Health)"
+            rec_action = "Good Condition (Routine Monitoring Only)"
             alert_class = "alert-green"
-            badge = "🟢 OPTIMAL"
+            badge = "🟢 GOOD CONDITION"
 
         # Alert Banner
         st.markdown(
@@ -504,10 +596,10 @@ def render_simulator_page(rl_model: Optional[DQN]) -> None:
 
     with col1:
         st.markdown("#### Input Defect Parameters")
-        digs = st.slider("Unsealed Utility Digs (Weight: -12 PCI)", 0, 10, 2)
-        patches = st.slider("Deteriorated Patches (Weight: -8 PCI)", 0, 15, 3)
-        cracks = st.slider("Surface Cracks (Weight: -4 PCI)", 0, 25, 4)
-        potholes = st.slider("Structural Potholes (Weight: -15 PCI)", 0, 10, 1)
+        digs = st.slider("Unsealed Utility Digs (Weight: -2.0 PCI)", 0, 10, 1)
+        patches = st.slider("Deteriorated Patches (Weight: -1.5 PCI)", 0, 15, 1)
+        cracks = st.slider("Surface Cracks (Weight: -0.8 PCI)", 0, 25, 5)
+        potholes = st.slider("Structural Potholes (Weight: -2.4 PCI)", 0, 10, 1)
         road_age = st.slider("Road Surface Age (Years)", 0.0, 25.0, 4.0, 0.5)
 
     defects_dict = {"digs": digs, "patches": patches, "cracks": cracks, "potholes": potholes}
@@ -519,30 +611,36 @@ def render_simulator_page(rl_model: Optional[DQN]) -> None:
         action_idx, _ = rl_model.predict(state_vector, deterministic=True)
         act_int = int(action_idx)
     else:
-        act_int = 2 if pci < 40 else (1 if pci < 70 else 0)
+        act_int = 2 if pci < 40 else (1 if pci < 80 else 0)
 
-    action_name = RL_ACTION_NAMES[act_int]
+    action_name = RL_ACTION_NAMES.get(act_int, "Do Nothing")
 
     with col2:
         st.markdown("#### Real-time AI Policy Output")
         st.plotly_chart(render_pci_gauge(pci), use_container_width=True)
 
-        if act_int == 2:
+        if pci < 40.0:
             st.markdown(
-                '<div class="alert-red"><h3>🔴 Action: Major Resurfacing</h3>'
-                '<p>Severe pavement degradation detected. Full structural resurfacing recommended.</p></div>',
+                '<div class="alert-red"><h3>🔴 Action: Repair Immediate</h3>'
+                '<p>Severe pavement degradation detected (&lt; 40 PCI). Full structural resurfacing and immediate repair required.</p></div>',
                 unsafe_allow_html=True,
             )
-        elif act_int == 1:
+        elif pci < 60.0:
             st.markdown(
-                '<div class="alert-yellow"><h3>🟡 Action: Preventive Repair</h3>'
-                '<p>Moderate wear. Patch sealing and crack filling will restore +20 PCI cost-effectively.</p></div>',
+                '<div class="alert-orange"><h3>🟠 Action: Repair It</h3>'
+                '<p>Substantial distress detected (40–60 PCI). Timely corrective surface repair and patching needed.</p></div>',
+                unsafe_allow_html=True,
+            )
+        elif pci < 80.0:
+            st.markdown(
+                '<div class="alert-yellow"><h3>🟡 Action: Maintain Properly</h3>'
+                '<p>Moderate wear detected (60–80 PCI). Scheduled crack sealing and preventive maintenance to maintain properly.</p></div>',
                 unsafe_allow_html=True,
             )
         else:
             st.markdown(
-                '<div class="alert-green"><h3>🟢 Action: Do Nothing</h3>'
-                '<p>Pavement condition is optimal. No budget expenditure required at this time.</p></div>',
+                '<div class="alert-green"><h3>🟢 Action: Good Condition</h3>'
+                '<p>Pavement condition is optimal (80–100 PCI). Road is in good health, routine monitoring only.</p></div>',
                 unsafe_allow_html=True,
             )
 

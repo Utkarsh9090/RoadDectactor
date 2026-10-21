@@ -88,3 +88,40 @@ def test_process_video_invalid_start_frame(synthetic_video_path: str) -> None:
             start_frame=500,  # Video only has 100 frames
             frame_count=100,
         )
+
+
+def test_clear_perfect_road_zero_defects() -> None:
+    """Ensures a clean highway with painted lane markings produces 0 false defects and 100 PCI."""
+    temp_dir = tempfile.mkdtemp()
+    clean_video = Path(temp_dir) / "clean_highway_test.mp4"
+
+    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+    writer = cv2.VideoWriter(str(clean_video), fourcc, 30.0, (640, 480))
+
+    for i in range(60):
+        frame = np.full((480, 640, 3), 110, dtype=np.uint8)
+        # Moving center dashed white line
+        dash_y = (i * 15) % 80
+        for y in range(-80 + dash_y, 480, 80):
+            cv2.line(frame, (320, y), (320, y + 40), (255, 255, 255), 6)
+        # Yellow and white road shoulders
+        cv2.line(frame, (80, 0), (80, 480), (0, 220, 255), 4)
+        cv2.line(frame, (560, 0), (560, 480), (255, 255, 255), 4)
+        writer.write(frame)
+    writer.release()
+
+    try:
+        detector = RoadDefectDetector(use_mock=False)
+        report = detector.process_video(str(clean_video))
+
+        assert report["summary"]["total_defects"] == {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0,
+        }
+        assert report["summary"]["overall_pci"] == 100.0
+    finally:
+        import shutil
+        shutil.rmtree(temp_dir, ignore_errors=True)
+

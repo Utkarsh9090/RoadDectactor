@@ -1,7 +1,7 @@
 @echo off
 title AI Smart Road Platform - Mobile Cloud Server
 echo =====================================================================
-echo  AI SMART ROAD DEFECT DETECTION & PREDICTIVE MAINTENANCE PLATFORM
+echo  AI SMART ROAD DEFECT DETECTION ^& PREDICTIVE MAINTENANCE PLATFORM
 echo =====================================================================
 echo.
 echo [1/2] Starting Streamlit Server...

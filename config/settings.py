@@ -43,11 +43,24 @@ class Settings:
     CONFIDENCE_THRESHOLD: float = 0.40
     IOU_THRESHOLD: float = 0.45
 
-    # PCI Deduction Penalties (PRD Section 4)
-    DIG_PENALTY: float = 12.0
-    PATCH_PENALTY: float = 8.0
-    CRACK_PENALTY: float = 4.0
-    POTHOLE_PENALTY: float = 15.0
+    # False-Positive Suppression & Tracking Calibration
+    HEURISTIC_SENSITIVITY: str = "medium"
+    MIN_CONFIRM_HITS: int = 2
+    TRACK_MAX_AGE: int = 8
+    TRACKER_IOU: float = 0.28
+    WORK_WIDTH: int = 640
+    ROI_TRAPEZOID_FRACTIONS: Tuple[Tuple[float, float], ...] = (
+        (0.08, 0.92),
+        (0.92, 0.92),
+        (0.62, 0.45),
+        (0.38, 0.45),
+    )
+
+    # PCI Deduction Penalties (Calibrated Maintenance Model)
+    DIG_PENALTY: float = 2.0
+    PATCH_PENALTY: float = 1.5
+    CRACK_PENALTY: float = 0.8
+    POTHOLE_PENALTY: float = 2.4
 
     MAX_PCI: float = 100.0
     MIN_PCI: float = 0.0

@@ -13,18 +13,18 @@ def test_default_settings_values() -> None:
     """Verifies that default configuration values adhere to PRD and Stage 1 specs."""
     assert settings.FRAME_SKIP == 5
     assert settings.DEFAULT_FPS == 30
-    assert settings.DIG_PENALTY == 12.0
-    assert settings.PATCH_PENALTY == 8.0
-    assert settings.CRACK_PENALTY == 4.0
-    assert settings.POTHOLE_PENALTY == 15.0
+    assert settings.DIG_PENALTY == 2.0
+    assert settings.PATCH_PENALTY == 1.5
+    assert settings.CRACK_PENALTY == 0.8
+    assert settings.POTHOLE_PENALTY == 2.4
 
     assert settings.VIDEO_INPUT_DIR.exists()
     assert settings.MODEL_SAVE_DIR.exists()
     assert str(settings.VIDEO_INPUT_DIR) == settings.VIDEO_INPUT_PATH
-    assert settings.PCI_WEIGHTS["dig"] == 12.0
-    assert settings.PCI_WEIGHTS["patch"] == 8.0
-    assert settings.PCI_WEIGHTS["crack"] == 4.0
-    assert settings.PCI_WEIGHTS["pothole"] == 15.0
+    assert settings.PCI_WEIGHTS["dig"] == 2.0
+    assert settings.PCI_WEIGHTS["patch"] == 1.5
+    assert settings.PCI_WEIGHTS["crack"] == 0.8
+    assert settings.PCI_WEIGHTS["pothole"] == 2.4
     assert settings.LOG_LEVEL == "INFO"
     assert "%(asctime)s" in settings.LOG_FORMAT
 

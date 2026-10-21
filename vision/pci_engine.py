@@ -137,11 +137,11 @@ def calculate_pci(defects: Union[DefectCounts, Mapping[str, Any]]) -> float:
 def classify_urgency(pci: float) -> str:
     """Classifies a PCI score into standardized intervention urgency tiers.
 
-    Tiers:
-        - PCI >= 85.0 -> "GOOD"
-        - 65.0 <= PCI < 85.0 -> "PREVENTIVE_MONITORING"
-        - 40.0 <= PCI < 65.0 -> "MINOR_REPAIR_NEEDED"
-        - PCI < 40.0 -> "CRITICAL_RECONSTRUCTION_REQUIRED"
+    Calibrated Maintenance Tiers:
+        - PCI >= 80.0 -> "GOOD" (Optimal condition / routine sweep)
+        - 60.0 <= PCI < 80.0 -> "MAINTAIN_PROPERLY" (Preventive repair & crack sealing)
+        - 40.0 <= PCI < 60.0 -> "REPAIR_REQUIRED" (Corrective patch & repair)
+        - PCI < 40.0 -> "REPAIR_IMMEDIATE" (Critical reconstruction & major resurfacing)
 
     Args:
         pci: Pavement Condition Index score (0.0 - 100.0).
@@ -150,25 +150,25 @@ def classify_urgency(pci: float) -> str:
         str: Standardized urgency classification tier.
     """
     bounded = max(0.0, min(100.0, float(pci)))
-    if bounded >= 85.0:
+    if bounded >= 80.0:
         return "GOOD"
-    if bounded >= 65.0:
-        return "PREVENTIVE_MONITORING"
+    if bounded >= 60.0:
+        return "MAINTAIN_PROPERLY"
     if bounded >= 40.0:
-        return "MINOR_REPAIR_NEEDED"
-    return "CRITICAL_RECONSTRUCTION_REQUIRED"
+        return "REPAIR_REQUIRED"
+    return "REPAIR_IMMEDIATE"
 
 
 def get_pci_condition_category(pci: float) -> str:
-    """Backwards-compatible wrapper mapping PCI to legacy condition labels."""
+    """Maps PCI score to intuitive maintenance directive labels."""
     urgency = classify_urgency(pci)
     mapping = {
         "GOOD": "Good",
-        "PREVENTIVE_MONITORING": "Satisfactory",
-        "MINOR_REPAIR_NEEDED": "Fair",
-        "CRITICAL_RECONSTRUCTION_REQUIRED": "Critical",
+        "MAINTAIN_PROPERLY": "Maintain Properly",
+        "REPAIR_REQUIRED": "Repair It",
+        "REPAIR_IMMEDIATE": "Repair Immediate",
     }
-    return mapping.get(urgency, "Critical")
+    return mapping.get(urgency, "Repair Immediate")
 
 
 def to_rl_state_vector(segment_state: RoadSegmentState) -> np.ndarray:

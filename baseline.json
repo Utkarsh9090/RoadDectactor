@@ -1,0 +1,123 @@
+{
+  "clean_clips": {
+    "clean_highway.mp4": {
+      "filename": "clean_highway.mp4",
+      "total_segments": 2,
+      "overall_pci": 100.0,
+      "total_defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      },
+      "segments": [
+        {
+          "segment_id": 1,
+          "frame_start": 0,
+          "frame_end": 100,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0
+        },
+        {
+          "segment_id": 2,
+          "frame_start": 100,
+          "frame_end": 200,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0
+        }
+      ]
+    },
+    "clean_shadows.mp4": {
+      "filename": "clean_shadows.mp4",
+      "total_segments": 2,
+      "overall_pci": 100.0,
+      "total_defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 0,
+        "potholes": 0
+      },
+      "segments": [
+        {
+          "segment_id": 1,
+          "frame_start": 0,
+          "frame_end": 100,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0
+        },
+        {
+          "segment_id": 2,
+          "frame_start": 100,
+          "frame_end": 200,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 0,
+            "potholes": 0
+          },
+          "pci_score": 100.0
+        }
+      ]
+    }
+  },
+  "damaged_clips": {
+    "damaged_road.mp4": {
+      "filename": "damaged_road.mp4",
+      "total_segments": 2,
+      "overall_pci": 90.4,
+      "total_defects": {
+        "digs": 0,
+        "patches": 0,
+        "cracks": 6,
+        "potholes": 2
+      },
+      "segments": [
+        {
+          "segment_id": 1,
+          "frame_start": 0,
+          "frame_end": 100,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 4,
+            "potholes": 1
+          },
+          "pci_score": 94.4
+        },
+        {
+          "segment_id": 2,
+          "frame_start": 100,
+          "frame_end": 200,
+          "defects": {
+            "digs": 0,
+            "patches": 0,
+            "cracks": 2,
+            "potholes": 1
+          },
+          "pci_score": 96.0
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total_clean_clips": 2,
+    "total_damaged_clips": 1,
+    "clean_false_positive_potholes": 0,
+    "clean_false_positive_cracks": 0
+  }
+}
